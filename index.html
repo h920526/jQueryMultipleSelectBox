@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>jQuery Multiple Select Box Plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<link type="text/css" rel="stylesheet" href="multipleselectbox.css" />
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.multipleselectbox-src.js"></script>
+<style type="text/css">
+body {
+	margin: 20px 30px 500px 30px;
+	padding: 0;
+	font: 14px verdana, geneva, lucida, 'lucida grande', arial, helvetica,
+		sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+a.original {
+	text-decoration: underline;
+}
+
+fieldset {
+	padding: 0 15px 15px 15px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+legend {
+	padding: 10px 5px;
+	font-size: small;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+legend a {
+	color: blue;
+}
+
+pre {
+	background-color: #eee;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	font-size: 0.8em;
+	padding: 5px 15px;
+	margin: 0;
+}
+</style>
+</head>
+<body>
+
+	<h3 style="text-align: center; text-decoration: underline;">jQuery
+		Multiple Select Box Plugin</h3>
+	<br />
+
+	<!-- ============================================================================================================== -->
+	<!-- The default multiple select box's tag of HTML -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend style="color: gray; text-decoration: line-through;">The
+			default multiple select box's tag of HTML</legend>
+		<div>
+			<select multiple="multiple" size="5" style="width: 500px;">
+				<option>Item 1</option>
+				<option>Item 2</option>
+				<option>Item 3</option>
+				<option>Item 4</option>
+				<option>Item 5</option>
+				<option>Item 6</option>
+				<option>Item 7</option>
+				<option>Item 8</option>
+				<option>Item 9</option>
+				<option>Item 10</option>
+				<option>Item 11</option>
+				<option>Item 12</option>
+				<option>Item 13</option>
+				<option>Item 14</option>
+				<option>Item 15</option>
+				<option>Item 16</option>
+				<option>Item 17</option>
+				<option>Item 18</option>
+				<option>Item 19</option>
+				<option>Item 20</option>
+				<option>Item 21</option>
+				<option>Item 22</option>
+				<option>Item 23</option>
+				<option>Item 24</option>
+				<option>Item 25</option>
+			</select>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Description -->
+	<!-- ============================================================================================================== -->
+
+	<br />
+	<font size="4"><b>[ The jQuery multiple select box plugin ]</b></font>
+	<br />
+	<br />
+	<small><a
+		href="http://plugins.jquery.com/project/jquerymultipleselectbox">http://plugins.jquery.com/project/jquerymultipleselectbox</a>
+		<br /> <a href="http://code.google.com/p/jquerymultipleselectbox/">http://code.google.com/p/jquerymultipleselectbox/</a>
+	</small>
+	<br />
+	<br />
+	<small>The example show how to use the jQueryMultipleSelectBox
+		to replace your browser's default multiple select box on an element
+		with overflow: auto.</small>
+	<br />
+	<small>You can see the result when controlling the mouse down
+		and drag out of the box.</small>
+	<br />
+	<br />
+	<small><b>Tested with: </b>Android 2+, Chrome 22, Firefox 16,
+		IE 6+, Safari 5</small>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: </a>
+		</legend>
+		<div>
+			<ul id="MultipleSelectBox">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#MultipleSelectBox").multipleSelectBox();
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#MultipleSelectBox").multipleSelectBox();
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: Max Limit -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: Max Limit</a>
+		</legend>
+		<div style="display: none;">
+			<ul id="MultipleSelectBox_MaxLimit">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#MultipleSelectBox_MaxLimit").multipleSelectBox({
+						maxLimit : 2
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#MultipleSelectBox_MaxLimit").multipleSelectBox({
+		maxLimit : 2
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: Scroll Speed -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: Scroll Speed</a>
+		</legend>
+		<div style="display: none;">
+			<ul id="MultipleSelectBox_ScrollSpeed">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#MultipleSelectBox_ScrollSpeed").multipleSelectBox({
+						scrollSpeed : 1
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#MultipleSelectBox_ScrollSpeed").multipleSelectBox({
+		scrollSpeed : 1
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: Show Result -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: Show Result</a>
+		</legend>
+		<div style="display: none;">
+			<ul id="MultipleSelectBox_ShowResult">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<div>
+				<small><b>Result: </b></small><span id="showResult">&nbsp;</span>
+			</div>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var showResult = document.getElementById("showResult");
+
+					$("#MultipleSelectBox_ShowResult").multipleSelectBox({
+						onSelectEnd : function() {
+							/* put all results into a component */
+							showResult.innerHTML = $(this).serializeMultipleSelectBox();
+						}
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	var showResult = document.getElementById("showResult");
+
+	$("#MultipleSelectBox_ShowResult").multipleSelectBox({
+		onSelectEnd : function() {
+			/* put all results into a component */
+			showResult.innerHTML = $(this).serializeMultipleSelectBox();
+		}
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: Form Component -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: Form Component</a> <small>(value-render)</small>
+		</legend>
+		<div style="display: none;">
+			<ul id="MultipleSelectBox_FormComponent">
+				<li value-render="aaa">Item 1</li>
+				<li class="selected" value-render="bbb">Item 2</li>
+				<li value-render="ccc"><font color="red" size="1">Style
+						Item <font size="7">3</font>
+				</font></li>
+				<li value-render="ddd" style="margin: 0 30px;"><font size="6"
+					color="green">Style <font size="3"><a
+							class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<form action="">
+				<input type="hidden" name="formComponent" /><input type="submit"
+					value="Submit" /><br />
+			</form>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#MultipleSelectBox_FormComponent").multipleSelectBox({
+						submitField : "formComponent"
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#MultipleSelectBox_FormComponent").multipleSelectBox({
+		submitField : "formComponent"
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: Draw Range -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: Draw Range</a>
+		</legend>
+		<div style="display: none;">
+			<ul id="MultipleSelectBox_DrawRange">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<div>
+				<small><b>Draw Range: </b></small>&nbsp;&nbsp;<input
+					id="drawRangeStartIndex" type="text" size="2" dir="rtl" value="3" />&nbsp;&nbsp;to&nbsp;&nbsp;<input
+					id="drawRangeCurrentIndex" type="text" size="2" dir="rtl"
+					value="10" />&nbsp;&nbsp;&nbsp;<input id="drawRangeButton"
+					type="button" value="Go" />
+			</div>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var $drawRangeContainer = $("#MultipleSelectBox_DrawRange").multipleSelectBox();
+
+					var drawRangeStartIndex = document.getElementById("drawRangeStartIndex");
+					var drawRangeCurrentIndex = document.getElementById("drawRangeCurrentIndex");
+
+					$("#drawRangeButton").click(function() {
+						var startIndex = parseInt(drawRangeStartIndex.value) - 1;
+						var currentIndex = parseInt(drawRangeCurrentIndex.value) - 1;
+						$drawRangeContainer.drawMultipleSelectBox(startIndex, currentIndex);
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	var $drawRangeContainer = $("#MultipleSelectBox_DrawRange").multipleSelectBox();
+
+	var drawRangeStartIndex = document.getElementById("drawRangeStartIndex");
+	var drawRangeCurrentIndex = document.getElementById("drawRangeCurrentIndex");
+
+	$("#drawRangeButton").click(function() {
+		var startIndex = parseInt(drawRangeStartIndex.value) - 1;
+		var currentIndex = parseInt(drawRangeCurrentIndex.value) - 1;
+		$drawRangeContainer.drawMultipleSelectBox(startIndex, currentIndex);
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple Demo: Horizontal Box -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
+				Demo: Horizontal Box</a>&nbsp;&nbsp;<font color="red"><small><b>New!</b></small></font>
+		</legend>
+		<div style="display: none;">
+			<div style="text-align: center;">
+				<ul id="MultipleSelectBox_HorizontalBox" style="margin: 0 auto;">
+					<li>Item 1</li>
+					<li class="selected">Item 2</li>
+					<li><font color="red" size="1">Style Item <font
+							size="7">3</font></font></li>
+					<li style="margin: 0 30px;"><font size="6" color="green">Style
+							<font size="3"><a class="original" href="#">Item 4</a></font>
+					</font></li>
+					<li class="disabled">Item 5 - Disabled</li>
+					<li class="optgroup">Item 6 - Group <small>(double
+							click it)</small></li>
+					<li class="optgroupitem">Group item 7</li>
+					<li class="optgroupitem">Group item 8</li>
+					<li class="optgroupitem">Group item 9</li>
+					<li>Item 10</li>
+					<li>Item 11</li>
+					<li>Item 12</li>
+					<li>Item 13</li>
+					<li>Item 14</li>
+					<li>Item 15</li>
+					<li>Item 16</li>
+					<li>Item 17</li>
+					<li>Item 18</li>
+					<li>Item 19</li>
+					<li>Item 20</li>
+					<li>Item 21</li>
+					<li>Item 22</li>
+					<li>Item 23</li>
+					<li>Item 24</li>
+					<li>Item 25</li>
+				</ul>
+			</div>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#MultipleSelectBox_HorizontalBox").multipleSelectBox({
+						isHorizontalMode : true
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#MultipleSelectBox_HorizontalBox").multipleSelectBox({
+		isHorizontalMode : true
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Advance Demo: DropDown -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Advance
+				Demo: DropDown</a>
+		</legend>
+		<div style="display: none;">
+			<input type="text" id="controlDropDown" value="Click Me!" /><br />
+			<ul id="MultipleSelectBox_DropDown"
+				style="position: absolute; background-color: white; display: none;">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var controlDropDown = $("#controlDropDown");
+
+					var $dropDownContainer = $("#MultipleSelectBox_DropDown").multipleSelectBox({
+						submitField : controlDropDown,
+						onSelectEnd : function() {
+							/* slide up */
+							$(this).slideUp("slow");
+						}
+					});
+
+					controlDropDown.click(function(e) {
+						e.stopPropagation();
+						$dropDownContainer.slideDown("slow");
+						$(document).one("click", function() {
+							$dropDownContainer.slideUp("slow");
+						});
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	var controlDropDown = $("#controlDropDown");
+
+	var $dropDownContainer = $("#MultipleSelectBox_DropDown").multipleSelectBox({
+		submitField : controlDropDown,
+		onSelectEnd : function() {
+			/* slide up */
+			$(this).slideUp("slow");
+		}
+	});
+
+	controlDropDown.click(function(e) {
+		e.stopPropagation();
+		$dropDownContainer.slideDown("slow");
+		$(document).one("click", function() {
+			$dropDownContainer.slideUp("slow");
+		});
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Advance Demo: Animation -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<legend>
+			<a href="javascript: void(0);"
+				onclick="$(this.parentNode).next().slideToggle('slow');">Advance
+				Demo: Animation</a>
+		</legend>
+		<div style="display: none;">
+			<ul id="MultipleSelectBox_Animation">
+				<li>Item 1</li>
+				<li class="selected">Item 2</li>
+				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
+				<li style="margin: 0 30px;"><font size="6" color="green">Style
+						<font size="3"><a class="original" href="#">Item 4</a></font>
+				</font></li>
+				<li class="disabled">Item 5 - Disabled</li>
+				<li class="optgroup">Item 6 - Group <small>(double
+						click it)</small></li>
+				<li class="optgroupitem">Group item 7</li>
+				<li class="optgroupitem">Group item 8</li>
+				<li class="optgroupitem">Group item 9</li>
+				<li>Item 10</li>
+				<li>Item 11</li>
+				<li>Item 12</li>
+				<li>Item 13</li>
+				<li>Item 14</li>
+				<li>Item 15</li>
+				<li>Item 16</li>
+				<li>Item 17</li>
+				<li>Item 18</li>
+				<li>Item 19</li>
+				<li>Item 20</li>
+				<li>Item 21</li>
+				<li>Item 22</li>
+				<li>Item 23</li>
+				<li>Item 24</li>
+				<li>Item 25</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#MultipleSelectBox_Animation").multipleSelectBox({
+						onSelectStart : function() {
+							$(this).children().stop().css({
+								opacity : "",
+								backgroundColor : ""
+							});
+						},
+						onSelectEnd : function() {
+							$(this).children(":not(.selected)").css("background-color", "white").animate({
+								opacity : 0.5
+							}, "fast");
+						}
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#MultipleSelectBox_Animation").multipleSelectBox({
+		onSelectStart : function() {
+			$(this).children().stop().css({
+				opacity : "",
+				backgroundColor : ""
+			});
+		},
+		onSelectEnd : function() {
+			$(this).children(":not(.selected)").css("background-color", "white").animate({
+				opacity : 0.5
+			}, "fast");
+		}
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- google-analytics -->
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-28376808-2']);
+		_gaq.push(['_trackPageview']);
+	
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>

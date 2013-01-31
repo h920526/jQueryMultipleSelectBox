@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jquery.multipleselectbox" default="deploy" basedir=".">
+
+	<property name="version" value="0.7.0" />
+	<!-- Google Closure Compiler r2180 (http://code.google.com/p/closure-compiler/downloads/list) -->
+	<property name="compressorPath" location="../../ex_js/compiler-20120917/compiler.jar" />
+	<tstamp>
+		<format property="today" pattern="yyyy/MM/dd" />
+	</tstamp>
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="clean">
+		<delete file="${ant.project.name}-${version}.zip" />
+		<delete file="js/${ant.project.name}-src.js" />
+		<delete file="js/${ant.project.name}-min.js" />
+	</target>
+
+	<!-- ================================= 
+          target: replace              
+         ================================= -->
+	<target name="replace" description="replace">
+		<delete file="js/${ant.project.name}-src.js" />
+		<copy file="js/${ant.project.name}.js" tofile="js/${ant.project.name}-src.js" overwrite="true" />
+		<replace file="js/${ant.project.name}-src.js">
+			<replacefilter token="%Revision%" value="${version}" />
+			<replacefilter token="%BuiltDate%" value="${today}" />
+		</replace>
+	</target>
+
+	<!-- ================================= 
+          target: compress              
+         ================================= -->
+	<target name="compress" description="compress">
+		<java jar="${compressorPath}" fork="true" failonerror="true">
+			<arg line="--js ${basedir}/js/${ant.project.name}-src.js --js_output_file ${basedir}/js/${ant.project.name}-min.js" />
+		</java>
+	</target>
+
+	<!-- ================================= 
+          target: deploy              
+         ================================= -->
+	<target name="deploy" description="deploy">
+		<antcall target="clean" />
+		<antcall target="replace" />
+		<antcall target="compress" />
+		<zip destfile="${ant.project.name}-${version}.zip" update="true">
+			<zipfileset prefix="${ant.project.name}-${version}" dir="${basedir}">
+				<include name="js/${ant.project.name}-*.js" />
+				<include name="*.html" />
+				<include name="*.css" />
+				<include name="ChangeLog.txt" />
+			</zipfileset>
+		</zip>
+	</target>
+
+</project>

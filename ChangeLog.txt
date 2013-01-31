@@ -1,0 +1,146 @@
+jQueryMultipleSelectBox Change Log
+
+Version 0.7.0
+====================
+．support touch device
+．Add parameter : scrollDistanceCalculator
+．Remove parameter : valueRendererArray
+
+Version 0.6.5
+====================
+．fix bug for Chrome22 and Opera12
+
+Version 0.6.4
+====================
+．fix bug for jQuery1.2, IE6 and IE7
+
+Version 0.6.3
+====================
+．fix bug: callback functions doesn't be triggered on key down
+．change parameters for callback functions
+．Minor changes
+
+Version 0.6.2
+====================
+．add support for key event
+．add support for tab focus
+．Minor bug fixes
+
+Version 0.6.1
+====================
+．Rename option's submitFieldName to submitField
+．Add more public functions
+．Minor changes
+
+Version 0.6.0
+====================
+．Add option group
+．Add parameter : isHorizontalMode
+．Add parameter : submitFieldName
+．Add onCreate event
+．Minor changes
+．Minor bug fixes
+
+Version 0.5.4
+====================
+．Minor bug fixes
+．Minor changes
+
+Version 0.5.3
+====================
+．Minor bug fixes
+．Minor changes
+
+Version 0.5.2
+====================
+．Add parameter : scrollSpeed
+．Minor bug fixes
+
+Version 0.5.1
+====================
+．Add method : getMultipleSelectBoxRowIndex
+．Add method : getMultipleSelectBoxOptions
+．Improved performance
+．Minor changes
+
+Version 0.5.0
+====================
+．Improve : drawMultipleSelectBox
+．Minor changes
+
+Version 0.4.8
+====================
+．Add support for IE6
+．Improved performance
+．Minor bug fixes
+
+Version 0.4.7
+====================
+．Add value renderer
+．Add method : serializeMultipleSelectBox
+．Minor bug fixes
+
+Version 0.4.6
+====================
+．Add mode : max limit
+
+Version 0.4.5
+====================
+．Add parameter(isScrollDisabled) for drawRange
+．Add callback function for event handler
+．Add method : yieldMultipleSelectBox
+．Minor bug fixes
+
+Version 0.4.3
+====================
+．Add disabled status
+．Minor bug fixes
+
+Version 0.4.2
+====================
+．Improved performance
+
+Version 0.4.1
+====================
+．Minor bug fixes
+
+Version 0.4.0
+====================
+．Add key event
+．Minor bug fixes
+
+Version 0.3.7
+====================
+．Improved performance
+
+Version 0.3.6
+====================
+．Use namespaces for event handler
+．Minor bug fixes
+
+Version 0.3.5
+====================
+．Improved performance
+．Remove parameter of callback function
+．Minor bug fixes
+
+Version 0.3.4
+====================
+．Remove deprecated event control
+
+Version 0.3.3
+====================
+．Minor bug fixes
+
+Version 0.3.2
+====================
+．Improved recalculating mode
+
+Version 0.3.1
+====================
+．Add callback function for event handler
+
+Version 0.3
+====================
+．Add method : recalculateMultipleSelectBox
+．Add method : destroyMultipleSelectBox
