@@ -1,12 +1,18 @@
 {
 	"name": "jQueryMultipleSelectBox",
 	"title": "jQueryMultipleSelectBox",
-	"description": "jQuery Multiple Select Box Plugin",
+	"description": "Demo: http://dl.dropbox.com/u/8316573/index.html",
 	"keywords": [
-		"jQueryMultipleSelectBox",
-		"multiple",
 		"select",
-		"box"
+		"option",
+		"selectable",
+		"scrollable",
+		"jquerymultipleselectbox",
+		"box",
+		"multipleselectbox",
+		"selectbox",
+		"form",
+		"multi"
 	],
 	"version": "0.7.0",
 	"author": {
