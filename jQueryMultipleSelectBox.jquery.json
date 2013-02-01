@@ -1,0 +1,29 @@
+{
+	"name": "jQueryMultipleSelectBox",
+	"title": "jQueryMultipleSelectBox",
+	"description": "jQuery Multiple Select Box Plugin",
+	"keywords": [
+		"jQueryMultipleSelectBox",
+		"multiple",
+		"select",
+		"box"
+	],
+	"version": "0.7.0",
+	"author": {
+		"name": "h920526",
+		"url": "https://github.com/h920526"
+	},
+	"licenses": [
+		{
+		"type": "Apache License 2.0",
+		"url": "http://www.apache.org/licenses/LICENSE-2.0"
+		}
+	],
+	"bugs": "http://code.google.com/p/jquerymultipleselectbox/issues/list",
+	"homepage": "http://code.google.com/p/jquerymultipleselectbox/",
+	"docs": "http://code.google.com/p/jquerymultipleselectbox/wiki/jQueryMultipleSelectBoxPluginDoc",
+	"download": "http://code.google.com/p/jquerymultipleselectbox/downloads/list",
+	"dependencies": {
+		"jquery": ">=1.2"
+	}
+}
