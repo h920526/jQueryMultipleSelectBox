@@ -3,7 +3,7 @@ jQueryMultipleSelectBox
 
 jQuery Multiple Select Box Plugin
 
-http://plugins.jquery.com/project/jquerymultipleselectbox
+http://code.google.com/p/jquerymultipleselectbox/
 
 Replace browser's default multiple select box with overflow: auto.
 
