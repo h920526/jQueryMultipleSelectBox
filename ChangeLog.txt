@@ -1,5 +1,9 @@
 jQueryMultipleSelectBox Change Log
 
+Version 0.7.1
+====================
+．Fix issue 4: selection cleared after scrolling
+
 Version 0.7.0
 ====================
 ．support touch device
