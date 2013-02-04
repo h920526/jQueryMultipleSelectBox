@@ -677,13 +677,14 @@
 			/* disable text selection */
 			e.preventDefault();
 			/* starting row */
-			var $target = $(e.target);
+			var target = e.target;
+			var $target = $(target);
 			var $startRow = $target;
 			/* correct the focus for chrome */
-			if ($target == this) {
+			if (target == this) {
 				return;
 			} else if ($target.parent()[0] != this) {
-				$target[0].focus();
+				target.focus();
 				$startRow = $target.parents("." + PLUGIN_NAMESPACE + ">*").eq(0);
 			} else {
 				this.focus();
