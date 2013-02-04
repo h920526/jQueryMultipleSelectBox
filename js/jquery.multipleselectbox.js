@@ -26,6 +26,7 @@
 
 	/* other variables */
 	var isTouchDevice = (!!("ontouchstart" in window) || !!("onmsgesturechange" in window));
+	var isIE = /msie/.test(navigator.userAgent.toLowerCase());
 	/* scroll calculator */
 	var scrollDistanceCalculator = function(options, containerInfo, mouseDragInfo) {
 		var previousCurrentIndex = mouseDragInfo.previousCurrentIndex;
@@ -758,7 +759,7 @@
 				}
 			});
 			/* IE hacked for mouse event */
-			if ($.browser.msie) {
+			if (isIE) {
 				$document.bind("mouseleave." + PLUGIN_NAMESPACE, function() {
 					$document.one("mousemove." + PLUGIN_NAMESPACE, function(e1) {
 						if (!e1.button) {

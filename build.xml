@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="jquery.multipleselectbox" default="deploy" basedir=".">
 
-	<property name="version" value="0.7.0" />
-	<!-- Google Closure Compiler r2180 (http://code.google.com/p/closure-compiler/downloads/list) -->
-	<property name="compressorPath" location="../../ex_js/compiler-20120917/compiler.jar" />
+	<property name="version" value="0.7.2" />
+	<!-- Google Closure Compiler 20121212 r2388 (http://code.google.com/p/closure-compiler/downloads/list) -->
+	<property name="compressorPath" location="../../ex_js/compiler-20121212/compiler.jar" />
 	<tstamp>
 		<format property="today" pattern="yyyy/MM/dd" />
 	</tstamp>
