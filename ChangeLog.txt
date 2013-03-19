@@ -1,5 +1,9 @@
 jQueryMultipleSelectBox Change Log
 
+Version 0.7.3
+====================
+．Fix issue 5: plugin have been triggered but it may not have been initialized after the global event
+
 Version 0.7.2
 ====================
 ．Fix bug for jQuery 1.9

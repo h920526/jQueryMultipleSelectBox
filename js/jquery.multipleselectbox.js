@@ -888,27 +888,30 @@
 		return $("." + PLUGIN_NAMESPACE).yieldMultipleSelectBox().each(function() {
 			var $container = $(this);
 			var containerInfo = $container.getMultipleSelectBoxInfo();
-			/* trigger callback */
-			if ($container.isMultipleSelectBoxSelecting()) {
-				/* reset style */
-				$container.removeClass(PLUGIN_STYLE_SELECTING);
-				var options = $container.getMultipleSelectBoxOptions();
-				var selectedArray = $container.getMultipleSelectBoxSelectedRows();
-				if (options.onSelectEnd) {
-					options.onSelectEnd.apply($container[0], [ e, selectedArray, containerInfo.lastStartIndex, containerInfo.lastCurrentIndex, containerInfo.prevStartIndex, containerInfo.prevCurrentIndex ]);
+			/* plugin may not have been initialized after the global event */
+			if (containerInfo != null) {
+				/* trigger callback */
+				if ($container.isMultipleSelectBoxSelecting()) {
+					/* reset style */
+					$container.removeClass(PLUGIN_STYLE_SELECTING);
+					var options = $container.getMultipleSelectBoxOptions();
+					var selectedArray = $container.getMultipleSelectBoxSelectedRows();
+					if (options.onSelectEnd) {
+						options.onSelectEnd.apply($container[0], [ e, selectedArray, containerInfo.lastStartIndex, containerInfo.lastCurrentIndex, containerInfo.prevStartIndex, containerInfo.prevCurrentIndex ]);
+					}
+					if (options.onSelectChange && (containerInfo.prevSelectedArray == null || getSelectedRowIndexArray(containerInfo.prevSelectedArray).join() != getSelectedRowIndexArray(selectedArray).join())) {
+						options.onSelectChange.apply($container[0], [ e, selectedArray, containerInfo.prevSelectedArray, containerInfo.lastStartIndex, containerInfo.lastCurrentIndex, containerInfo.prevStartIndex, containerInfo.prevCurrentIndex ]);
+					}
+					/* reset the field value */
+					if (options.submitField) {
+						options.submitField.val($container.serializeMultipleSelectBox());
+					}
+					containerInfo.prevSelectedArray = selectedArray;
 				}
-				if (options.onSelectChange && (containerInfo.prevSelectedArray == null || getSelectedRowIndexArray(containerInfo.prevSelectedArray).join() != getSelectedRowIndexArray(selectedArray).join())) {
-					options.onSelectChange.apply($container[0], [ e, selectedArray, containerInfo.prevSelectedArray, containerInfo.lastStartIndex, containerInfo.lastCurrentIndex, containerInfo.prevStartIndex, containerInfo.prevCurrentIndex ]);
-				}
-				/* reset the field value */
-				if (options.submitField) {
-					options.submitField.val($container.serializeMultipleSelectBox());
-				}
-				containerInfo.prevSelectedArray = selectedArray;
+				/* reset history */
+				containerInfo.prevStartIndex = containerInfo.lastStartIndex;
+				containerInfo.prevCurrentIndex = containerInfo.lastCurrentIndex;
 			}
-			/* reset history */
-			containerInfo.prevStartIndex = containerInfo.lastStartIndex;
-			containerInfo.prevCurrentIndex = containerInfo.lastCurrentIndex;
 		});
 	}
 
