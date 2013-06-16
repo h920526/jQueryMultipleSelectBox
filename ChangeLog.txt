@@ -1,5 +1,16 @@
 jQueryMultipleSelectBox Change Log
 
+Version 0.8.0
+====================
+．Remove method: recalculateMultipleSelectBox, getMultipleSelectBoxInfo, getSelectedRowIndexArray and drawOption.isGetPositionByCache
+．Add method: getMultipleSelectBoxViewport and getMultipleSelectBoxHistory
+．Add namespace for all plugin event binding
+．Change options: option name scrollDistanceCalculator to scrollHelper
+．Change options: default scrollSpeed 20 to 50
+．Rename containerHistory's lastStartIndex, lastCurrentIndex and prevSelectedArray
+．Fix bug for IE10: detect touch device return true always
+．Minor changes
+
 Version 0.7.3
 ====================
 ．Fix issue 5: plugin have been triggered but it may not have been initialized after the global event
@@ -14,28 +25,28 @@ Version 0.7.1
 
 Version 0.7.0
 ====================
-．support touch device
-．Add parameter : scrollDistanceCalculator
-．Remove parameter : valueRendererArray
+．Support touch device
+．Add parameter: scrollDistanceCalculator
+．Remove parameter: valueRendererArray
 
 Version 0.6.5
 ====================
-．fix bug for Chrome22 and Opera12
+．Fix bug for Chrome22 and Opera12
 
 Version 0.6.4
 ====================
-．fix bug for jQuery1.2, IE6 and IE7
+．Fix bug for jQuery1.2, IE6 and IE7
 
 Version 0.6.3
 ====================
-．fix bug: callback functions doesn't be triggered on key down
-．change parameters for callback functions
+．Fix bug: callback functions doesn't be triggered on key down
+．Change parameters for callback functions
 ．Minor changes
 
 Version 0.6.2
 ====================
-．add support for key event
-．add support for tab focus
+．Add support for key event
+．Add support for tab focus
 ．Minor bug fixes
 
 Version 0.6.1
@@ -47,8 +58,8 @@ Version 0.6.1
 Version 0.6.0
 ====================
 ．Add option group
-．Add parameter : isHorizontalMode
-．Add parameter : submitFieldName
+．Add parameter: isHorizontalMode
+．Add parameter: submitFieldName
 ．Add onCreate event
 ．Minor changes
 ．Minor bug fixes
@@ -65,19 +76,19 @@ Version 0.5.3
 
 Version 0.5.2
 ====================
-．Add parameter : scrollSpeed
+．Add parameter: scrollSpeed
 ．Minor bug fixes
 
 Version 0.5.1
 ====================
-．Add method : getMultipleSelectBoxRowIndex
-．Add method : getMultipleSelectBoxOptions
+．Add method: getMultipleSelectBoxRowIndex
+．Add method: getMultipleSelectBoxOptions
 ．Improved performance
 ．Minor changes
 
 Version 0.5.0
 ====================
-．Improve : drawMultipleSelectBox
+．Improved performance
 ．Minor changes
 
 Version 0.4.8
@@ -89,18 +100,18 @@ Version 0.4.8
 Version 0.4.7
 ====================
 ．Add value renderer
-．Add method : serializeMultipleSelectBox
+．Add method: serializeMultipleSelectBox
 ．Minor bug fixes
 
 Version 0.4.6
 ====================
-．Add mode : max limit
+．Add mode: max limit
 
 Version 0.4.5
 ====================
 ．Add parameter(isScrollDisabled) for drawRange
 ．Add callback function for event handler
-．Add method : yieldMultipleSelectBox
+．Add method: yieldMultipleSelectBox
 ．Minor bug fixes
 
 Version 0.4.3
@@ -154,5 +165,5 @@ Version 0.3.1
 
 Version 0.3
 ====================
-．Add method : recalculateMultipleSelectBox
-．Add method : destroyMultipleSelectBox
+．Add method: recalculateMultipleSelectBox
+．Add method: destroyMultipleSelectBox

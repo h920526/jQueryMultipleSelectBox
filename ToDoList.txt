@@ -1,6 +1,6 @@
 jQueryMultipleSelectBox Feature Request
 
 ====================
-1. IE9 onmousemove doesn't be triggered when mouse out of the browser
-2. Add search feature (popup input box, and then auto scroll to where you want)
-3. When Opera onmousedown over 2 seconds, the selector doesn't work anymore
+1. work with jQuery UI
+2. IE9 onmousemove doesn't be triggered when mouse out of the browser
+3. Add search feature (popup input box, and then auto scroll to where you want)

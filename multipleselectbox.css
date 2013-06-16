@@ -6,6 +6,8 @@
 	overflow: auto;
 	padding: 1px 0;
 	width: 500px;
+	background-color: white;
+	color: black;
 	/* corner */
 	-moz-border-radius: 5px;
 	-khtml-border-radius: 5px;

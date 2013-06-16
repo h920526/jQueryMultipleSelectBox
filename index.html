@@ -33,17 +33,25 @@ fieldset {
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+	/* for IE9/10.. */
+	margin-top: 15px;
 }
 
-legend {
-	padding: 10px 5px;
-	font-size: small;
+/* for IE9/10.. */
+fieldset span.legend {
+	color: #4578D4;
+	font-size: 12px;
 	font-weight: bold;
-	text-decoration: underline;
+	background-color: white;
+	position: relative;
+	top: -8px;
+	padding: 3px 15px;
+	cursor: pointer;
 }
 
-legend a {
-	color: blue;
+fieldset span.legend i.newlabel {
+	color: red;
+	font-size: 10px;
 }
 
 pre {
@@ -67,8 +75,9 @@ pre {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend style="color: gray; text-decoration: line-through;">The
-			default multiple select box's tag of HTML</legend>
+		<span class="legend"
+			style="color: gray; text-decoration: line-through;">The
+			default multiple select box's tag of HTML</span>
 		<div>
 			<select multiple="multiple" size="5" style="width: 500px;">
 				<option>Item 1</option>
@@ -109,7 +118,7 @@ pre {
 	<br />
 	<br />
 	<small><a
-		href="http://plugins.jquery.com/project/jquerymultipleselectbox">http://plugins.jquery.com/project/jquerymultipleselectbox</a>
+		href="http://plugins.jquery.com/jQueryMultipleSelectBox/">http://plugins.jquery.com/jQueryMultipleSelectBox/</a>
 		<br /> <a href="http://code.google.com/p/jquerymultipleselectbox/">http://code.google.com/p/jquerymultipleselectbox/</a>
 	</small>
 	<br />
@@ -130,11 +139,8 @@ pre {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: </a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo:</span>
 		<div>
 			<ul id="MultipleSelectBox">
 				<li>Item 1</li>
@@ -185,11 +191,8 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: Max Limit</a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo: Max Limit</span>
 		<div style="display: none;">
 			<ul id="MultipleSelectBox_MaxLimit">
 				<li>Item 1</li>
@@ -244,11 +247,8 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: Scroll Speed</a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo: Scroll Speed</span>
 		<div style="display: none;">
 			<ul id="MultipleSelectBox_ScrollSpeed">
 				<li>Item 1</li>
@@ -303,11 +303,8 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: Show Result</a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo: Show Result</span>
 		<div style="display: none;">
 			<ul id="MultipleSelectBox_ShowResult">
 				<li>Item 1</li>
@@ -376,11 +373,9 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: Form Component</a> <small>(value-render)</small>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo: Form Component <small>(value-render)</small>
+		</span>
 		<div style="display: none;">
 			<ul id="MultipleSelectBox_FormComponent">
 				<li value-render="aaa">Item 1</li>
@@ -443,11 +438,8 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: Draw Range</a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo: Draw Range</span>
 		<div style="display: none;">
 			<ul id="MultipleSelectBox_DrawRange">
 				<li>Item 1</li>
@@ -524,11 +516,9 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Simple
-				Demo: Horizontal Box</a>&nbsp;&nbsp;<font color="red"><small><b>New!</b></small></font>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			Demo: Horizontal Box &nbsp;<i class="newlabel">New!</i>
+		</span>
 		<div style="display: none;">
 			<div style="text-align: center;">
 				<ul id="MultipleSelectBox_HorizontalBox" style="margin: 0 auto;">
@@ -586,11 +576,8 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Advance
-				Demo: DropDown</a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Advance
+			Demo: DropDown</span>
 		<div style="display: none;">
 			<input type="text" id="controlDropDown" value="Click Me!" /><br />
 			<ul id="MultipleSelectBox_DropDown"
@@ -675,11 +662,8 @@ $(document).ready(function() {
 	<!-- ============================================================================================================== -->
 
 	<fieldset>
-		<legend>
-			<a href="javascript: void(0);"
-				onclick="$(this.parentNode).next().slideToggle('slow');">Advance
-				Demo: Animation</a>
-		</legend>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Advance
+			Demo: Animation</span>
 		<div style="display: none;">
 			<ul id="MultipleSelectBox_Animation">
 				<li>Item 1</li>
@@ -752,13 +736,16 @@ $(document).ready(function() {
 	<!-- google-analytics -->
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-28376808-2']);
-		_gaq.push(['_trackPageview']);
-	
+		_gaq.push([ '_setAccount', 'UA-28376808-2' ]);
+		_gaq.push([ '_trackPageview' ]);
+
 		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
 </body>
