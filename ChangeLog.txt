@@ -1,5 +1,14 @@
 jQueryMultipleSelectBox Change Log
 
+Version 0.8.1
+====================
+．Add isPopupMode
+．Rename containerHistory's startIndex, currentIndex, prevStartIndex and prevCurrentIndex
+．Remove getMultipleSelectBoxCachedRows's isReNew parameter
+．Add method: clearMultipleSelectBoxCachedRows
+．Add method: selectMultipleSelectBoxRow, unselectMultipleSelectBoxRow, selectAllMultipleSelectBoxRows, unselectAllMultipleSelectBoxRows, enableMultipleSelectBoxRow and disableMultipleSelectBoxRow
+．Minor bug fixes
+
 Version 0.8.0
 ====================
 ．Remove method: recalculateMultipleSelectBox, getMultipleSelectBoxInfo, getSelectedRowIndexArray and drawOption.isGetPositionByCache

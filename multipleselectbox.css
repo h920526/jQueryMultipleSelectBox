@@ -61,11 +61,20 @@
 	display: inline-block;
 	/* for IE6 and IE7 */
 	*display: inline;
+	zoom: 1;
 	vertical-align: middle;
 }
 
 .MultipleSelectBox.horizontal li.optgroup {
 	margin-bottom: 10px;
+}
+
+/* popup mode */
+.MultipleSelectBox.popup {
+	background-color: white;
+	display: none;
+	position: absolute;
+	z-index: 1;
 }
 
 /* Ultimate CSS Gradient Generator (Orange 3D) */

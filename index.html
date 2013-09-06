@@ -172,6 +172,10 @@ pre {
 				<li>Item 24</li>
 				<li>Item 25</li>
 			</ul>
+			<input type="button" value="Select all"
+				onclick="$('#MultipleSelectBox').selectAllMultipleSelectBoxRows()" /><input
+				type="button" value="Unselect all"
+				onclick="$('#MultipleSelectBox').unselectAllMultipleSelectBoxRows()" /><br />
 			<br />
 			<script type="text/javascript">
 				$(document).ready(function() {
@@ -580,8 +584,7 @@ $(document).ready(function() {
 			Demo: DropDown</span>
 		<div style="display: none;">
 			<input type="text" id="controlDropDown" value="Click Me!" /><br />
-			<ul id="MultipleSelectBox_DropDown"
-				style="position: absolute; background-color: white; display: none;">
+			<ul id="MultipleSelectBox_DropDown">
 				<li>Item 1</li>
 				<li class="selected">Item 2</li>
 				<li><font color="red" size="1">Style Item <font size="7">3</font></font></li>
@@ -614,44 +617,18 @@ $(document).ready(function() {
 			<br />
 			<script type="text/javascript">
 				$(document).ready(function() {
-					var controlDropDown = $("#controlDropDown");
-
-					var $dropDownContainer = $("#MultipleSelectBox_DropDown").multipleSelectBox({
-						submitField : controlDropDown,
-						onSelectEnd : function() {
-							/* slide up */
-							$(this).slideUp("slow");
-						}
-					});
-
-					controlDropDown.click(function(e) {
-						e.stopPropagation();
-						$dropDownContainer.slideDown("slow");
-						$(document).one("click", function() {
-							$dropDownContainer.slideUp("slow");
-						});
+					$("#MultipleSelectBox_DropDown").multipleSelectBox({
+						isPopupMode : true,
+						submitField : $("#controlDropDown")
 					});
 				});
 			</script>
 			<small><b>Usage: </b></small><br />
 			<pre>
 $(document).ready(function() {
-	var controlDropDown = $("#controlDropDown");
-
-	var $dropDownContainer = $("#MultipleSelectBox_DropDown").multipleSelectBox({
-		submitField : controlDropDown,
-		onSelectEnd : function() {
-			/* slide up */
-			$(this).slideUp("slow");
-		}
-	});
-
-	controlDropDown.click(function(e) {
-		e.stopPropagation();
-		$dropDownContainer.slideDown("slow");
-		$(document).one("click", function() {
-			$dropDownContainer.slideUp("slow");
-		});
+	$("#MultipleSelectBox_DropDown").multipleSelectBox({
+		isPopupMode : true,
+		submitField : $("#controlDropDown")
 	});
 });</pre>
 		</div>

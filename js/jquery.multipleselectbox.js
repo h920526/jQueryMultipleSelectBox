@@ -18,6 +18,7 @@
 	var PLUGIN_ATTR_VALUE_RENDER = "value-render";
 	var PLUGIN_STYLE_HORIZONTAL = "horizontal";
 	var PLUGIN_STYLE_VERTICAL = "vertical";
+	var PLUGIN_STYLE_POPUP = "popup";
 	var PLUGIN_STYLE_DISABLED = "disabled";
 	var PLUGIN_STYLE_SELECTED = "selected";
 	var PLUGIN_STYLE_SELECTING = "selecting";
@@ -29,6 +30,7 @@
 		maxLimit : -1,
 		scrollSpeed : 50,
 		isHorizontalMode : false,
+		isPopupMode : false,
 		isTouchDeviceMode : PLUGIN_MODE_AUTO,
 		isMouseEventEnabled : true,
 		isKeyEventEnabled : true,
@@ -61,7 +63,7 @@
 			options = $.extend({}, defaultOptions, options);
 			/* correct options */
 			if (options.isTouchDeviceMode == PLUGIN_MODE_AUTO) {
-				options.isTouchDeviceMode = !!('ontouchstart' in window);
+				options.isTouchDeviceMode = !!("ontouchstart" in window);
 			}
 			if (options.scrollHelper == null) {
 				options.scrollHelper = defaultScrollHelper;
@@ -73,8 +75,9 @@
 				$container.destroyMultipleSelectBox();
 				/* prepare className */
 				$container.addClass(PLUGIN_NAMESPACE).addClass(options.isHorizontalMode ? PLUGIN_STYLE_HORIZONTAL : PLUGIN_STYLE_VERTICAL);
-				/* prepare options */
-				$container.data("options", options);
+				if (options.isPopupMode) {
+					$container.addClass(PLUGIN_STYLE_POPUP);
+				}
 				/* disable text selection and give the focus */
 				$container.css({
 					userSelect : "none",
@@ -88,6 +91,14 @@
 					e.preventDefault();
 					return false;
 				});
+				/* prepare options */
+				$container.data("options", options);
+				/* correct options */
+				var submitField = options.submitField;
+				if (submitField != null && typeof submitField == "string") {
+					var $submitField = $("input[name=" + submitField + "]");
+					options.submitField = ($submitField.length > 0 ? $submitField : $("<input type='hidden' name='" + submitField + "'/>").insertAfter($container));
+				}
 				/* touch scroll supported for ios5+ only */
 				/* $container.css("-webkit-overflow-scrolling", "touch"); */
 				/* initialize */
@@ -105,11 +116,6 @@
 				if (options.onSelectChange != null) {
 					$container.bind("onSelectChange." + PLUGIN_NAMESPACE, options.onSelectChange);
 				}
-				/* correct options */
-				if (options.submitField != null && typeof options.submitField == "string") {
-					var $submitField = $("input[name=" + options.submitField + "]");
-					options.submitField = ($submitField.length > 0 ? $submitField : $("<input type='hidden' name='" + options.submitField + "' />").insertAfter($container));
-				}
 				/* trigger event */
 				if (options.onCreate != null) {
 					options.onCreate.apply($container[0]);
@@ -120,17 +126,15 @@
 		/**
 		 * Public : Get container's cached rows
 		 * 
-		 * @param isReNew
-		 *            boolean
 		 * @param selector
 		 *            String
 		 * @return jQuery
 		 */
-		getMultipleSelectBoxCachedRows : function(isReNew, selector) {
+		getMultipleSelectBoxCachedRows : function(selector) {
 			return this.pushStack($.map(this, function(container) {
 				var $container = $(container);
 				var $rows = $container.data("rows");
-				if (isReNew || $rows == null) {
+				if ($rows == null) {
 					/* cache rows if necessary */
 					$rows = $container.children();
 					$container.data("rows", $rows);
@@ -140,6 +144,15 @@
 				}
 				return $rows.get();
 			}));
+		},
+
+		/**
+		 * Public : Clear container's cached rows
+		 * 
+		 * @return jQuery
+		 */
+		clearMultipleSelectBoxCachedRows : function() {
+			return this.removeData("rows");
 		},
 
 		/**
@@ -202,7 +215,7 @@
 		},
 
 		/**
-		 * Public : Get container's info
+		 * Public : Get container's history
 		 * 
 		 * @return Object
 		 */
@@ -211,12 +224,11 @@
 			var containerHistory = $container.data("history");
 			if (isReNew || containerHistory == null) {
 				containerHistory = {
-					startIndex : -1,
-					currentIndex : -1,
-					selectedRows : null,
-					/* the index before last index */
-					prevStartIndex : -1,
-					prevCurrentIndex : -1
+					selectingStartIndex : -1,
+					selectingCurrentIndex : -1,
+					selectedStartIndex : -1,
+					selectedCurrentIndex : -1,
+					selectedRows : null
 				};
 				$container.data("history", containerHistory);
 			}
@@ -311,8 +323,8 @@
 				}
 				/* reset history */
 				var containerHistory = $container.getMultipleSelectBoxHistory();
-				containerHistory.startIndex = startIndex;
-				containerHistory.currentIndex = currentIndex;
+				containerHistory.selectingStartIndex = startIndex;
+				containerHistory.selectingCurrentIndex = currentIndex;
 			});
 		},
 
@@ -360,10 +372,11 @@
 			/* don't unbind the document's mouseup event */
 			return this.yieldMultipleSelectBox().each(function() {
 				var $container = $(this);
+				var options = $container.getMultipleSelectBoxOptions();
 				/* reset event handler */
 				unbindEvents($container, [ "selectstart", "mousedown", "mouseup", "keydown", "touchstart", "onCreate", "onSelectStart", "onSelectEnd", "onSelectChange" ]);
-				/* clear cache */
 				unbindEvents($container.getMultipleSelectBoxCachedRows(), [ "dblclick" ]);
+				/* clear cache */
 				$container.removeData("history").removeData("rows").removeData("options");
 			});
 		},
@@ -432,6 +445,62 @@
 		},
 
 		/**
+		 * Public : Select row
+		 * 
+		 * @returns jQuery
+		 */
+		selectMultipleSelectBoxRow : function() {
+			return this.filter(":not(." + PLUGIN_STYLE_DISABLED + ",." + PLUGIN_STYLE_OPTGROUP + ")").addClass(PLUGIN_STYLE_SELECTED);
+		},
+
+		/**
+		 * Public : Unselect row
+		 * 
+		 * @returns jQuery
+		 */
+		unselectMultipleSelectBoxRow : function() {
+			return this.removeClass(PLUGIN_STYLE_SELECTED + " " + PLUGIN_STYLE_SELECTING);
+		},
+
+		/**
+		 * Public : Select all rows
+		 * 
+		 * @returns jQuery
+		 */
+		selectAllMultipleSelectBoxRows : function() {
+			this.getMultipleSelectBoxCachedRows().selectMultipleSelectBoxRow();
+			return this;
+		},
+
+		/**
+		 * Public : Unselect all rows
+		 * 
+		 * @returns jQuery
+		 */
+		unselectAllMultipleSelectBoxRows : function() {
+			this.getMultipleSelectBoxCachedRows().unselectMultipleSelectBoxRow();
+			return this;
+		},
+
+		/**
+		 * Public : Enable row
+		 * 
+		 * @returns jQuery
+		 */
+		enableMultipleSelectBoxRow : function() {
+			return this.removeClass(PLUGIN_STYLE_DISABLED);
+		},
+
+		/**
+		 * Public : Disable row
+		 * 
+		 * @returns jQuery
+		 */
+		disableMultipleSelectBoxRow : function() {
+			return this.addClass(PLUGIN_STYLE_DISABLED);
+		},
+
+		/**
 		 * Public : Get container or row's viewport
 		 * 
 		 * @return Object
@@ -479,8 +548,10 @@
 	 * Private : Unbind Events
 	 */
 	function unbindEvents($jq, eventNameArray) {
-		for ( var i = eventNameArray.length - 1; i >= 0; i--) {
-			$jq.unbind(eventNameArray[i] + "." + PLUGIN_NAMESPACE);
+		if ($jq != null) {
+			for ( var i = eventNameArray.length - 1; i >= 0; i--) {
+				$jq.unbind(eventNameArray[i] + "." + PLUGIN_NAMESPACE);
+			}
 		}
 		return $jq;
 	}
@@ -560,7 +631,7 @@
 			currentRowFrontPos = currentRowViewport.getRightPos(relativedViewport);
 		}
 		var containerHistory = $container.getMultipleSelectBoxHistory();
-		var lastCurrentIndex = containerHistory.currentIndex;
+		var lastCurrentIndex = containerHistory.selectingCurrentIndex;
 		var scrollPos = null;
 		if (startIndex < currentIndex || (startIndex == currentIndex && lastCurrentIndex >= 0 && lastCurrentIndex < currentIndex)) {
 			if (currentRowFrontPos < containerScrollPos || currentRowFrontPos - containerVisibleRange > containerScrollPos) {
@@ -612,7 +683,7 @@
 			if (options.isKeyEventEnabled) {
 				if (e.shiftKey) {
 					currentIndex = startIndex;
-					startIndex = containerHistory.startIndex;
+					startIndex = containerHistory.selectingStartIndex;
 				} else if (e.ctrlKey) {
 					isSelectionOpposite = isSelectionRetained = true;
 				}
@@ -625,7 +696,7 @@
 			});
 			/* listening */
 			var scrollHelperFunc = function(e1) {
-				options.scrollHelper(e1, $container, startIndex, isTouchDeviceMode);
+				options.scrollHelper(e1, $container, startIndex, isSelectionRetained);
 			};
 			$container.yieldMultipleSelectBox().bind("mouseenter." + PLUGIN_NAMESPACE, function() {
 				unbindEvents($document, [ "mousemove" ]);
@@ -639,7 +710,7 @@
 			}).one("mouseup." + PLUGIN_NAMESPACE, function(e1) {
 				scrollHelperFunc(e1);
 			});
-			/* IE hacked for mouse event */
+			/* IE hacked for mouse up event */
 			if (isIE) {
 				$document.bind("mouseleave." + PLUGIN_NAMESPACE, function() {
 					$document.one("mousemove." + PLUGIN_NAMESPACE, function(e1) {
@@ -686,7 +757,7 @@
 			var keyCode = e.keyCode;
 			if ((keyCode >= 37 && keyCode <= 40) || keyCode == 32) {
 				var containerHistory = $container.getMultipleSelectBoxHistory();
-				var lastCurrentIndex = containerHistory.currentIndex;
+				var lastCurrentIndex = containerHistory.selectingCurrentIndex;
 				/* prepare info for drawing */
 				var isSelectionOpposite = false;
 				var isSelectionRetained = e.shiftKey;
@@ -760,6 +831,13 @@
 		if (options.isTouchDeviceMode) {
 			initializeMultipleSelectBoxTouchEvent($container);
 		}
+		/* popup mode */
+		if (options.isPopupMode && options.submitField != null) {
+			/* click event is after than mouseup event */
+			options.submitField.bind("click." + PLUGIN_NAMESPACE, function() {
+				$container.slideDown("slow");
+			});
+		}
 		return $container;
 	}
 
@@ -770,20 +848,24 @@
 		/* yield event handler */
 		return $("." + PLUGIN_NAMESPACE).yieldMultipleSelectBox().each(function() {
 			var $container = $(this);
+			var options = $container.getMultipleSelectBoxOptions();
 			var containerHistory = $container.getMultipleSelectBoxHistory();
 			if ($container.isMultipleSelectBoxSelecting()) {
 				/* reset style */
 				$container.removeClass(PLUGIN_STYLE_SELECTING);
-				var options = $container.getMultipleSelectBoxOptions();
 				var selectedRows = $container.getMultipleSelectBoxSelectedRows();
+				/* slide up */
+				if (options.isPopupMode) {
+					$container.slideUp("slow");
+				}
 				/* fire event */
 				$container.trigger("mouseup." + PLUGIN_NAMESPACE);
 				/* trigger callback */
 				if (options.onSelectEnd != null) {
-					options.onSelectEnd.apply($container[0], [ e, selectedRows, containerHistory.startIndex, containerHistory.currentIndex, containerHistory.prevStartIndex, containerHistory.prevCurrentIndex ]);
+					options.onSelectEnd.apply($container[0], [ e, selectedRows, containerHistory.selectingStartIndex, containerHistory.selectingCurrentIndex, containerHistory.selectedStartIndex, containerHistory.selectedCurrentIndex ]);
 				}
 				if (options.onSelectChange != null && (containerHistory.selectedRows == null || !isJQueryCollectionEquals(containerHistory.selectedRows, selectedRows))) {
-					options.onSelectChange.apply($container[0], [ e, selectedRows, containerHistory.selectedRows, containerHistory.startIndex, containerHistory.currentIndex, containerHistory.prevStartIndex, containerHistory.prevCurrentIndex ]);
+					options.onSelectChange.apply($container[0], [ e, selectedRows, containerHistory.selectedRows, containerHistory.selectingStartIndex, containerHistory.selectingCurrentIndex, containerHistory.selectedStartIndex, containerHistory.selectedCurrentIndex ]);
 				}
 				/* reset the field value */
 				if (options.submitField != null) {
@@ -792,8 +874,8 @@
 				containerHistory.selectedRows = selectedRows;
 			}
 			/* reset history */
-			containerHistory.prevStartIndex = containerHistory.startIndex;
-			containerHistory.prevCurrentIndex = containerHistory.currentIndex;
+			containerHistory.selectedStartIndex = containerHistory.selectingStartIndex;
+			containerHistory.selectedCurrentIndex = containerHistory.selectingCurrentIndex;
 		});
 	}
 
@@ -886,7 +968,7 @@
 		}
 		/* remove first request */
 		var containerHistory = $container.getMultipleSelectBoxHistory();
-		var lastCurrentIndex = containerHistory.currentIndex;
+		var lastCurrentIndex = containerHistory.selectingCurrentIndex;
 		if (lastCurrentIndex == null || lastCurrentIndex < 0) {
 			return -1;
 		}
