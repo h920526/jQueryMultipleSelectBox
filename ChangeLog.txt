@@ -1,5 +1,11 @@
 jQueryMultipleSelectBox Change Log
 
+Version -
+====================
+．Add isFilterEnabled
+．Remove getMultipleSelectBoxHistory's isReNew parameter
+．Add method: clearMultipleSelectBoxHistory and refreshMultipleSelectBox
+
 Version 0.8.1
 ====================
 ．Add isPopupMode

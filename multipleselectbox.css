@@ -77,6 +77,25 @@
 	z-index: 1;
 }
 
+/* filter */
+.MultipleSelectBoxFilter {
+	background-color: white;
+	position: absolute;
+	z-index: 1;
+	/* corner */
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 2px #888;
+	-webkit-box-shadow: 0 0 2px #888;
+	box-shadow: 0 0 2px #888;
+}
+
+.MultipleSelectBoxFilter.disabled {
+	display: none;
+}
+
 /* Ultimate CSS Gradient Generator (Orange 3D) */
 .MultipleSelectBox li.selected {
 	background: #ffa84c;

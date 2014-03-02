@@ -24,6 +24,7 @@
 	var PLUGIN_STYLE_SELECTING = "selecting";
 	var PLUGIN_STYLE_OPTGROUP = "optgroup";
 	var PLUGIN_STYLE_OPTGROUPITEM = "optgroupitem";
+	var PLUGIN_FILTER_NAMESPACE = "MultipleSelectBoxFilter";
 
 	/* default options */
 	var defaultOptions = {
@@ -36,6 +37,9 @@
 		isKeyEventEnabled : true,
 		/* form options */
 		submitField : null,
+		/* filter options */
+		isFilterEnabled : true,
+		filterField : null,
 		/* callback function */
 		onCreate : null,
 		onSelectStart : null,
@@ -99,6 +103,15 @@
 					var $submitField = $("input[name=" + submitField + "]");
 					options.submitField = ($submitField.length > 0 ? $submitField : $("<input type='hidden' name='" + submitField + "'/>").insertAfter($container));
 				}
+				if (options.isFilterEnabled) {
+					var filterField = options.filterField;
+					if (filterField == null) {
+						filterField = $("<div>Search: <input type='text' size='20'/></div>").insertAfter($container);
+					} else if (typeof filterField == "string") {
+						filterField = $("#" + filterField);
+					}
+					options.filterField = filterField.addClass(PLUGIN_FILTER_NAMESPACE + " " + PLUGIN_STYLE_DISABLED);
+				}
 				/* touch scroll supported for ios5+ only */
 				/* $container.css("-webkit-overflow-scrolling", "touch"); */
 				/* initialize */
@@ -153,6 +166,15 @@
 		 */
 		clearMultipleSelectBoxCachedRows : function() {
 			return this.removeData("rows");
+		},
+
+		/**
+		 * Public : Refresh container
+		 * 
+		 * @return jQuery
+		 */
+		refreshMultipleSelectBox : function() {
+			return this.clearMultipleSelectBoxCachedRows();
 		},
 
 		/**
@@ -219,10 +241,10 @@
 		 * 
 		 * @return Object
 		 */
-		getMultipleSelectBoxHistory : function(isReNew) {
+		getMultipleSelectBoxHistory : function() {
 			var $container = this;
 			var containerHistory = $container.data("history");
-			if (isReNew || containerHistory == null) {
+			if (containerHistory == null) {
 				containerHistory = {
 					selectingStartIndex : -1,
 					selectingCurrentIndex : -1,
@@ -233,6 +255,15 @@
 				$container.data("history", containerHistory);
 			}
 			return containerHistory;
+		},
+
+		/**
+		 * Public : Clear container's history
+		 * 
+		 * @return jQuery
+		 */
+		clearMultipleSelectBoxHistory : function() {
+			return this.removeData("history");
 		},
 
 		/**
@@ -301,10 +332,10 @@
 				}
 				/* reset all style if necessary */
 				$rows.eq(currentIndex).addClass(PLUGIN_STYLE_SELECTING);
-				for ( var i = unselectedArray.length - 1; i >= 0; i--) {
+				for (var i = unselectedArray.length - 1; i >= 0; i--) {
 					unselectedArray[i].removeClass(PLUGIN_STYLE_SELECTED);
 				}
-				for ( var i = selectingArraySize - 1; i >= 0; i--) {
+				for (var i = selectingArraySize - 1; i >= 0; i--) {
 					selectingArray[i].addClass(PLUGIN_STYLE_SELECTED);
 				}
 				/* reset scroll bar */
@@ -374,10 +405,13 @@
 				var $container = $(this);
 				var options = $container.getMultipleSelectBoxOptions();
 				/* reset event handler */
-				unbindEvents($container, [ "selectstart", "mousedown", "mouseup", "keydown", "touchstart", "onCreate", "onSelectStart", "onSelectEnd", "onSelectChange" ]);
+				if (options != null) {
+					unbindEvents(options.submitField, [ "click" ]);
+				}
+				unbindEvents($container, [ "selectstart", "mousedown", "mouseup", "keydown", "touchstart", "focus", "blur", "onCreate", "onSelectStart", "onSelectEnd", "onSelectChange" ]);
 				unbindEvents($container.getMultipleSelectBoxCachedRows(), [ "dblclick" ]);
 				/* clear cache */
-				$container.removeData("history").removeData("rows").removeData("options");
+				$container.clearMultipleSelectBoxCachedRows().clearMultipleSelectBoxHistory().removeData("options");
 			});
 		},
 
@@ -549,7 +583,7 @@
 	 */
 	function unbindEvents($jq, eventNameArray) {
 		if ($jq != null) {
-			for ( var i = eventNameArray.length - 1; i >= 0; i--) {
+			for (var i = eventNameArray.length - 1; i >= 0; i--) {
 				$jq.unbind(eventNameArray[i] + "." + PLUGIN_NAMESPACE);
 			}
 		}
@@ -815,6 +849,33 @@
 	}
 
 	/**
+	 * Private : Initialize MultipleSelectBox Filter
+	 */
+	function initializeMultipleSelectBoxFilter($container) {
+		var options = $container.getMultipleSelectBoxOptions();
+		var containerOffset = $container.offset();
+		var filterField = options.filterField;
+		// FIXME
+		$container.bind("mouseenter." + PLUGIN_NAMESPACE, function() {
+			$container.trigger("focus." + PLUGIN_NAMESPACE);
+		}).bind("mouseleave." + PLUGIN_NAMESPACE, function(e1) {
+			$container.trigger("blur." + PLUGIN_NAMESPACE);
+		});
+		filterField.css({
+			top : containerOffset.top - filterField.height() * 0.9,
+			left : containerOffset.left + $container.outerWidth() - filterField.outerWidth()
+		}).bind("mouseenter." + PLUGIN_NAMESPACE, function() {
+			filterField.removeClass(PLUGIN_STYLE_DISABLED);
+		});
+		// TODO
+		$container.bind("focus." + PLUGIN_NAMESPACE, function() {
+			filterField.removeClass(PLUGIN_STYLE_DISABLED);
+		}).bind("blur." + PLUGIN_NAMESPACE, function() {
+			filterField.addClass(PLUGIN_STYLE_DISABLED);
+		});
+	}
+
+	/**
 	 * Private : Initialize MultipleSelectBox
 	 */
 	function initializeMultipleSelectBox($container) {
@@ -830,6 +891,10 @@
 		/* touch event */
 		if (options.isTouchDeviceMode) {
 			initializeMultipleSelectBoxTouchEvent($container);
+		}
+		/* search helper */
+		if (options.isFilterEnabled) {
+			initializeMultipleSelectBoxFilter($container);
 		}
 		/* popup mode */
 		if (options.isPopupMode && options.submitField != null) {
@@ -987,7 +1052,7 @@
 		var currentIndex = lastCurrentIndex;
 		if (targetPosRelation > 0) {
 			/* up */
-			for ( var i = lastCurrentIndex - 1; i >= 0; i--) {
+			for (var i = lastCurrentIndex - 1; i >= 0; i--) {
 				if (compareRowViewport($rows.eq(i).getMultipleSelectBoxViewport(), relativedViewport, isHorizontalMode, targetPos) == 0) {
 					currentIndex = i;
 					break;
@@ -995,7 +1060,7 @@
 			}
 		} else if (targetPosRelation < 0) {
 			/* down */
-			for ( var i = lastCurrentIndex + 1; i < rowSize; i++) {
+			for (var i = lastCurrentIndex + 1; i < rowSize; i++) {
 				if (compareRowViewport($rows.eq(i).getMultipleSelectBoxViewport(), relativedViewport, isHorizontalMode, targetPos) == 0) {
 					currentIndex = i;
 					break;
