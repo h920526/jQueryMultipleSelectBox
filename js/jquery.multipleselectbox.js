@@ -51,6 +51,7 @@
 
 	/* others variables */
 	var isIE = /msie/.test(navigator.userAgent.toLowerCase());
+	var isTouchDevice = !!("ontouchstart" in window);
 
 	/**
 	 * Public Method
@@ -67,7 +68,7 @@
 			options = $.extend({}, defaultOptions, options);
 			/* correct options */
 			if (options.isTouchDeviceMode == PLUGIN_MODE_AUTO) {
-				options.isTouchDeviceMode = !!("ontouchstart" in window);
+				options.isTouchDeviceMode = isTouchDevice;
 			}
 			if (options.scrollHelper == null) {
 				options.scrollHelper = defaultScrollHelper;
