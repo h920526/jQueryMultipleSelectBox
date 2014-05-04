@@ -80,6 +80,7 @@
 /* filter */
 .MultipleSelectBoxFilter {
 	background-color: white;
+	padding: 3px 5px 2px 5px;
 	position: absolute;
 	z-index: 1;
 	/* corner */
@@ -87,9 +88,14 @@
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	-moz-box-shadow: 0 0 2px #888;
-	-webkit-box-shadow: 0 0 2px #888;
-	box-shadow: 0 0 2px #888;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
+}
+
+.MultipleSelectBoxFilter input {
+	border: none;
+	border-bottom: 1px solid gray;
 }
 
 .MultipleSelectBoxFilter.disabled {

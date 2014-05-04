@@ -14,6 +14,7 @@
 (function($) {
 	/* static variables */
 	var PLUGIN_NAMESPACE = "MultipleSelectBox";
+	var PLUGIN_FILTER_NAMESPACE = "MultipleSelectBoxFilter";
 	var PLUGIN_MODE_AUTO = "auto";
 	var PLUGIN_ATTR_VALUE_RENDER = "value-render";
 	var PLUGIN_STYLE_HORIZONTAL = "horizontal";
@@ -24,7 +25,6 @@
 	var PLUGIN_STYLE_SELECTING = "selecting";
 	var PLUGIN_STYLE_OPTGROUP = "optgroup";
 	var PLUGIN_STYLE_OPTGROUPITEM = "optgroupitem";
-	var PLUGIN_FILTER_NAMESPACE = "MultipleSelectBoxFilter";
 
 	/* default options */
 	var defaultOptions = {
@@ -52,6 +52,7 @@
 	/* others variables */
 	var isIE = /msie/.test(navigator.userAgent.toLowerCase());
 	var isTouchDevice = !!("ontouchstart" in window);
+	var scrollBarSize = 16;
 
 	/**
 	 * Public Method
@@ -856,22 +857,25 @@
 		var options = $container.getMultipleSelectBoxOptions();
 		var containerOffset = $container.offset();
 		var filterField = options.filterField;
-		// FIXME
-		$container.bind("mouseenter." + PLUGIN_NAMESPACE, function() {
-			$container.trigger("focus." + PLUGIN_NAMESPACE);
-		}).bind("mouseleave." + PLUGIN_NAMESPACE, function(e1) {
-			$container.trigger("blur." + PLUGIN_NAMESPACE);
+		$container.bind("mouseenter." + PLUGIN_FILTER_NAMESPACE, function() {
+			filterField.removeClass(PLUGIN_STYLE_DISABLED);
+		}).bind("mouseleave." + PLUGIN_FILTER_NAMESPACE, function() {
+			filterField.addClass(PLUGIN_STYLE_DISABLED);
+		}).bind("focus." + PLUGIN_FILTER_NAMESPACE, function() {
+			filterField.removeClass(PLUGIN_STYLE_DISABLED);
+		}).bind("blur." + PLUGIN_FILTER_NAMESPACE, function() {
+			filterField.addClass(PLUGIN_STYLE_DISABLED);
 		});
 		filterField.css({
-			top : containerOffset.top - filterField.height() * 0.9,
-			left : containerOffset.left + $container.outerWidth() - filterField.outerWidth()
-		}).bind("mouseenter." + PLUGIN_NAMESPACE, function() {
+			top : containerOffset.top + $container.height() - filterField.outerHeight(),
+			left : containerOffset.left + $container.width() - filterField.outerWidth() - scrollBarSize
+		}).bind("mouseenter." + PLUGIN_FILTER_NAMESPACE, function() {
 			filterField.removeClass(PLUGIN_STYLE_DISABLED);
-		});
-		// TODO
-		$container.bind("focus." + PLUGIN_NAMESPACE, function() {
+		}).bind("mouseleave." + PLUGIN_FILTER_NAMESPACE, function() {
+			filterField.addClass(PLUGIN_STYLE_DISABLED);
+		}).bind("focus." + PLUGIN_FILTER_NAMESPACE, function() {
 			filterField.removeClass(PLUGIN_STYLE_DISABLED);
-		}).bind("blur." + PLUGIN_NAMESPACE, function() {
+		}).bind("blur." + PLUGIN_FILTER_NAMESPACE, function() {
 			filterField.addClass(PLUGIN_STYLE_DISABLED);
 		});
 	}
