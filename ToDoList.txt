@@ -1,7 +1,8 @@
 jQueryMultipleSelectBox Feature Request
 
 ====================
-1. selectAllMultipleSelectBoxRows() work with maxLimit
-2. work with jQuery UI
-3. IE9 onmousemove doesn't be triggered when mouse out of the browser
-4. Add search feature (popup input box, and then auto scroll to where you want)
+1. submitField doesn't on page load
+2. selectAllMultipleSelectBoxRows() doesn't work with maxLimit
+3. work with jQuery UI
+4. IE9 onmousemove doesn't be triggered when mouse out of the browser
+5. Add search feature (popup input box, and then auto scroll to where you want)
