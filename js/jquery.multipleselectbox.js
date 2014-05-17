@@ -105,6 +105,10 @@
 					var $submitField = $("input[name=" + submitField + "]");
 					options.submitField = ($submitField.length > 0 ? $submitField : $("<input type='hidden' name='" + submitField + "'/>").insertAfter($container));
 				}
+				/* reset the field value */
+				if (options.submitField != null) {
+					options.submitField.val($container.serializeMultipleSelectBox());
+				}
 				if (options.isFilterEnabled) {
 					var filterField = options.filterField;
 					if (filterField == null) {

@@ -5,6 +5,7 @@ Version -
 ．Add isFilterEnabled
 ．Remove getMultipleSelectBoxHistory's isReNew parameter
 ．Add method: clearMultipleSelectBoxHistory and refreshMultipleSelectBox
+．Fix bug: serialize submit field after initializing
 
 Version 0.8.1
 ====================
