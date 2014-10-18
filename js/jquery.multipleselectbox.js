@@ -28,25 +28,25 @@
 
 	/* default options */
 	var defaultOptions = {
-		"maxLimit" : -1,
-		"scrollSpeed" : 50,
-		"isHorizontalMode" : false,
-		"isPopupMode" : false,
-		"isTouchDeviceMode" : PLUGIN_MODE_AUTO,
-		"isMouseEventEnabled" : true,
-		"isKeyEventEnabled" : true,
+		"maxLimit": -1,
+		"scrollSpeed": 50,
+		"isHorizontalMode": false,
+		"isPopupMode": false,
+		"isTouchDeviceMode": PLUGIN_MODE_AUTO,
+		"isMouseEventEnabled": true,
+		"isKeyEventEnabled": true,
 		/* form options */
-		"submitField" : null,
+		"submitField": null,
 		/* filter options */
-		"isFilterEnabled" : true,
-		"filterField" : null,
+		"isFilterEnabled": true,
+		"filterField": null,
 		/* callback function */
-		"onCreate" : null,
-		"onSelectStart" : null,
-		"onSelectEnd" : null,
-		"onSelectChange" : null,
+		"onCreate": null,
+		"onSelectStart": null,
+		"onSelectEnd": null,
+		"onSelectChange": null,
 		/* others */
-		"scrollHelper" : null
+		"scrollHelper": null
 	};
 
 	/* others variables */
@@ -65,7 +65,7 @@
 		 *            Object
 		 * @return jQuery
 		 */
-		"multipleSelectBox" : function(options) {
+		"multipleSelectBox": function(options) {
 			options = $.extend({}, defaultOptions, options);
 			return this.each(function() {
 				var $container = $(this);
@@ -83,7 +83,7 @@
 		 *            String
 		 * @return jQuery
 		 */
-		"getMultipleSelectBoxCachedRows" : function(selector) {
+		"getMultipleSelectBoxCachedRows": function(selector) {
 			return this.pushStack($.map(this, function(container) {
 				var $container = $(container);
 				var $rows = $container.data("rows");
@@ -104,7 +104,7 @@
 		 * 
 		 * @return jQuery
 		 */
-		"clearMultipleSelectBoxCachedRows" : function() {
+		"clearMultipleSelectBoxCachedRows": function() {
 			return this.removeData("rows");
 		},
 
@@ -113,7 +113,7 @@
 		 * 
 		 * @return jQuery
 		 */
-		"refreshMultipleSelectBox" : function() {
+		"refreshMultipleSelectBox": function() {
 			return this.clearMultipleSelectBoxCachedRows();
 		},
 
@@ -122,7 +122,7 @@
 		 * 
 		 * @return jQuery
 		 */
-		"getMultipleSelectBoxSelectedRows" : function() {
+		"getMultipleSelectBoxSelectedRows": function() {
 			return $.grep(this.getMultipleSelectBoxCachedRows(), function(row) {
 				var $childRow = $(row);
 				return ($childRow.isMultipleSelectBoxRowSelectable() && $childRow.isMultipleSelectBoxRowSelected());
@@ -136,7 +136,7 @@
 		 *            String
 		 * @return jQuery
 		 */
-		"getMultipleSelectBoxOptGroupItems" : function(selector) {
+		"getMultipleSelectBoxOptGroupItems": function(selector) {
 			return this.pushStack($.map(this, function(optGroupRow) {
 				var $optGroupRow = $(optGroupRow);
 				/* nextUntil */
@@ -159,7 +159,7 @@
 		 *            jQuery
 		 * @return Number
 		 */
-		"getMultipleSelectBoxRowIndex" : function($container) {
+		"getMultipleSelectBoxRowIndex": function($container) {
 			var $row = this;
 			if ($container == null) {
 				$container = $row.parent();
@@ -172,7 +172,7 @@
 		 * 
 		 * @return Object
 		 */
-		"getMultipleSelectBoxOptions" : function() {
+		"getMultipleSelectBoxOptions": function() {
 			return this.data("options");
 		},
 
@@ -181,16 +181,16 @@
 		 * 
 		 * @return Object
 		 */
-		"getMultipleSelectBoxHistory" : function() {
+		"getMultipleSelectBoxHistory": function() {
 			var $container = this;
 			var containerHistory = $container.data("history");
 			if (containerHistory == null) {
 				containerHistory = {
-					"selectingStartIndex" : -1,
-					"selectingCurrentIndex" : -1,
-					"selectedStartIndex" : -1,
-					"selectedCurrentIndex" : -1,
-					"selectedRows" : null
+					"selectingStartIndex": -1,
+					"selectingCurrentIndex": -1,
+					"selectedStartIndex": -1,
+					"selectedCurrentIndex": -1,
+					"selectedRows": null
 				};
 				$container.data("history", containerHistory);
 			}
@@ -202,7 +202,7 @@
 		 * 
 		 * @return jQuery
 		 */
-		"clearMultipleSelectBoxHistory" : function() {
+		"clearMultipleSelectBoxHistory": function() {
 			return this.removeData("history");
 		},
 
@@ -217,11 +217,11 @@
 		 *            Object
 		 * @return jQuery
 		 */
-		"drawMultipleSelectBox" : function(startIndex, currentIndex, drawOption) {
+		"drawMultipleSelectBox": function(startIndex, currentIndex, drawOption) {
 			drawOption = $.extend({
-				"isSelectionOpposite" : false,
-				"isSelectionRetained" : false,
-				"scrollPos" : -1
+				"isSelectionOpposite": false,
+				"isSelectionRetained": false,
+				"scrollPos": -1
 			}, drawOption);
 			return this.each(function() {
 				var $container = $(this);
@@ -304,7 +304,7 @@
 		 * 
 		 * @return Array
 		 */
-		"serializeMultipleSelectBoxArray" : function() {
+		"serializeMultipleSelectBoxArray": function() {
 			return $.map(this.getMultipleSelectBoxSelectedRows(), function(row) {
 				var $childRow = $(row);
 				var resultValue = ($childRow.is("[" + PLUGIN_ATTR_VALUE_RENDER + "]") ? row.getAttribute(PLUGIN_ATTR_VALUE_RENDER) : $childRow.text());
@@ -320,7 +320,7 @@
 		 *            String
 		 * @return String
 		 */
-		"serializeMultipleSelectBox" : function(separator) {
+		"serializeMultipleSelectBox": function(separator) {
 			return this.serializeMultipleSelectBoxArray().join(separator == null ? "," : separator);
 		},
 
@@ -329,7 +329,7 @@
 		 * 
 		 * @return jQuery
 		 */
-		"yieldMultipleSelectBox" : function() {
+		"yieldMultipleSelectBox": function() {
 			unbindEvents($(document), [ "mouseleave", "mousemove" ]);
 			return unbindEvents(this, [ "mouseenter", "mouseleave", "mouseover", "touchmove" ]);
 		},
@@ -339,7 +339,7 @@
 		 * 
 		 * @return jQuery
 		 */
-		"destroyMultipleSelectBox" : function() {
+		"destroyMultipleSelectBox": function() {
 			/* don't unbind the document's mouseup event */
 			return this.yieldMultipleSelectBox().each(function() {
 				var $container = $(this);
@@ -360,7 +360,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxSelecting" : function() {
+		"isMultipleSelectBoxSelecting": function() {
 			return this.hasClass(PLUGIN_STYLE_SELECTING);
 		},
 
@@ -369,7 +369,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxRowDisabled" : function() {
+		"isMultipleSelectBoxRowDisabled": function() {
 			return this.hasClass(PLUGIN_STYLE_DISABLED);
 		},
 
@@ -378,7 +378,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxRowSelected" : function() {
+		"isMultipleSelectBoxRowSelected": function() {
 			return this.hasClass(PLUGIN_STYLE_SELECTED);
 		},
 
@@ -387,7 +387,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxRowSelecting" : function() {
+		"isMultipleSelectBoxRowSelecting": function() {
 			return this.hasClass(PLUGIN_STYLE_SELECTING);
 		},
 
@@ -396,7 +396,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxRowOptGroup" : function() {
+		"isMultipleSelectBoxRowOptGroup": function() {
 			return this.hasClass(PLUGIN_STYLE_OPTGROUP);
 		},
 
@@ -405,7 +405,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxRowOptGroupItem" : function() {
+		"isMultipleSelectBoxRowOptGroupItem": function() {
 			return this.hasClass(PLUGIN_STYLE_OPTGROUPITEM);
 		},
 
@@ -414,7 +414,7 @@
 		 * 
 		 * @return boolean
 		 */
-		"isMultipleSelectBoxRowSelectable" : function() {
+		"isMultipleSelectBoxRowSelectable": function() {
 			return (!this.isMultipleSelectBoxRowDisabled() && !this.isMultipleSelectBoxRowOptGroup());
 		},
 
@@ -423,7 +423,7 @@
 		 * 
 		 * @returns jQuery
 		 */
-		"selectMultipleSelectBoxRow" : function() {
+		"selectMultipleSelectBoxRow": function() {
 			return this.filter(":not(." + PLUGIN_STYLE_DISABLED + ",." + PLUGIN_STYLE_OPTGROUP + ")").addClass(PLUGIN_STYLE_SELECTED);
 		},
 
@@ -432,7 +432,7 @@
 		 * 
 		 * @returns jQuery
 		 */
-		"unselectMultipleSelectBoxRow" : function() {
+		"unselectMultipleSelectBoxRow": function() {
 			return this.removeClass(PLUGIN_STYLE_SELECTED + " " + PLUGIN_STYLE_SELECTING);
 		},
 
@@ -441,7 +441,7 @@
 		 * 
 		 * @returns jQuery
 		 */
-		"selectAllMultipleSelectBoxRows" : function() {
+		"selectAllMultipleSelectBoxRows": function() {
 			this.getMultipleSelectBoxCachedRows().selectMultipleSelectBoxRow();
 			return this;
 		},
@@ -451,7 +451,7 @@
 		 * 
 		 * @returns jQuery
 		 */
-		"unselectAllMultipleSelectBoxRows" : function() {
+		"unselectAllMultipleSelectBoxRows": function() {
 			this.getMultipleSelectBoxCachedRows().unselectMultipleSelectBoxRow();
 			return this;
 		},
@@ -461,7 +461,7 @@
 		 * 
 		 * @returns jQuery
 		 */
-		"enableMultipleSelectBoxRow" : function() {
+		"enableMultipleSelectBoxRow": function() {
 			return this.removeClass(PLUGIN_STYLE_DISABLED);
 		},
 
@@ -470,7 +470,7 @@
 		 * 
 		 * @returns jQuery
 		 */
-		"disableMultipleSelectBoxRow" : function() {
+		"disableMultipleSelectBoxRow": function() {
 			return this.addClass(PLUGIN_STYLE_DISABLED);
 		},
 
@@ -479,39 +479,39 @@
 		 * 
 		 * @return Object
 		 */
-		"getMultipleSelectBoxViewport" : function() {
+		"getMultipleSelectBoxViewport": function() {
 			var $container = this;
 			var container = $container[0];
 			var containerOffset = $container.offset();
 			return {
-				"getScrollLeft" : function() {
+				"getScrollLeft": function() {
 					return $container.scrollLeft();
 				},
-				"getScrollTop" : function() {
+				"getScrollTop": function() {
 					return $container.scrollTop();
 				},
-				"getWidth" : function(isOuter) {
+				"getWidth": function(isOuter) {
 					return (isOuter ? $container.outerWidth() : $container.innerWidth());
 				},
-				"getHeight" : function(isOuter) {
+				"getHeight": function(isOuter) {
 					return (isOuter ? $container.outerHeight() : $container.innerHeight());
 				},
-				"getScrollWidth" : function() {
+				"getScrollWidth": function() {
 					return container.scrollWidth;
 				},
-				"getScrollHeight" : function() {
+				"getScrollHeight": function() {
 					return container.scrollHeight;
 				},
-				"getLeftPos" : function(relativedViewport) {
+				"getLeftPos": function(relativedViewport) {
 					return containerOffset.left - (relativedViewport != null ? relativedViewport.getLeftPos() : 0);
 				},
-				"getTopPos" : function(relativedViewport) {
+				"getTopPos": function(relativedViewport) {
 					return containerOffset.top - (relativedViewport != null ? relativedViewport.getTopPos() : 0);
 				},
-				"getRightPos" : function(relativedViewport) {
+				"getRightPos": function(relativedViewport) {
 					return this.getLeftPos(relativedViewport) + this.getWidth(true);
 				},
-				"getBottomPos" : function(relativedViewport) {
+				"getBottomPos": function(relativedViewport) {
 					return this.getTopPos(relativedViewport) + this.getHeight(true);
 				}
 			};
@@ -664,9 +664,9 @@
 			}
 			/* starting */
 			$container.addClass(PLUGIN_STYLE_SELECTING).drawMultipleSelectBox(startIndex, currentIndex, {
-				"isSelectionOpposite" : isSelectionOpposite,
-				"isSelectionRetained" : isSelectionRetained,
-				"scrollPos" : null
+				"isSelectionOpposite": isSelectionOpposite,
+				"isSelectionRetained": isSelectionRetained,
+				"scrollPos": null
 			});
 			/* listening */
 			var scrollHelperFunc = function(e1) {
@@ -711,7 +711,7 @@
 					childGroupItemSelectSize = maxLimit;
 				}
 				$container.drawMultipleSelectBox(childGroupItemList.eq(0).getMultipleSelectBoxRowIndex($container), childGroupItemList.eq(childGroupItemSelectSize - 1).getMultipleSelectBoxRowIndex($container), {
-					"scrollPos" : null
+					"scrollPos": null
 				});
 				/* special case */
 				$container.addClass(PLUGIN_STYLE_SELECTING);
@@ -751,8 +751,8 @@
 				}
 				/* starting */
 				$container.addClass(PLUGIN_STYLE_SELECTING).drawMultipleSelectBox(lastCurrentIndex, lastCurrentIndex, {
-					"isSelectionOpposite" : isSelectionOpposite,
-					"isSelectionRetained" : isSelectionRetained
+					"isSelectionOpposite": isSelectionOpposite,
+					"isSelectionRetained": isSelectionRetained
 				});
 				validateMultipleSelectBox(e);
 				return false;
@@ -805,8 +805,8 @@
 			filterField.addClass(PLUGIN_STYLE_DISABLED);
 		});
 		filterField.css({
-			"top" : containerOffset.top + $container.height() - filterField.outerHeight(),
-			"left" : containerOffset.left + $container.width() - filterField.outerWidth() - scrollBarSize
+			"top": containerOffset.top + $container.height() - filterField.outerHeight(),
+			"left": containerOffset.left + $container.width() - filterField.outerWidth() - scrollBarSize
 		}).bind("mouseenter." + PLUGIN_FILTER_NAMESPACE, function() {
 			filterField.removeClass(PLUGIN_STYLE_DISABLED);
 		}).bind("mouseleave." + PLUGIN_FILTER_NAMESPACE, function() {
@@ -850,13 +850,13 @@
 		}
 		/* disable text selection and give the focus */
 		$container.css({
-			"userSelect" : "none",
-			"KhtmlUserSelect" : "none",
-			"MozUserSelect" : "none",
-			"WebkitUserSelect" : "none"
+			"userSelect": "none",
+			"KhtmlUserSelect": "none",
+			"MozUserSelect": "none",
+			"WebkitUserSelect": "none"
 		}).attr({
-			"unselectable" : "on",
-			"tabindex" : 0
+			"unselectable": "on",
+			"tabindex": 0
 		}).bind("selectstart." + PLUGIN_NAMESPACE, function(e) {
 			e.preventDefault();
 			return false;
@@ -932,46 +932,48 @@
 	 */
 	function validateMultipleSelectBox(e) {
 		/* yield event handler */
-		return $("." + PLUGIN_NAMESPACE).yieldMultipleSelectBox().each(function() {
-			var $container = $(this);
-			var options = $container.getMultipleSelectBoxOptions();
-			var containerHistory = $container.getMultipleSelectBoxHistory();
-			if ($container.isMultipleSelectBoxSelecting()) {
-				/* reset style */
-				$container.removeClass(PLUGIN_STYLE_SELECTING);
-				var selectedRows = $container.getMultipleSelectBoxSelectedRows();
-				/* slide up */
-				if (options.isPopupMode) {
-					$container.slideUp("slow");
+		return $("." + PLUGIN_NAMESPACE).yieldMultipleSelectBox().each(
+			function() {
+				var $container = $(this);
+				var options = $container.getMultipleSelectBoxOptions();
+				var containerHistory = $container.getMultipleSelectBoxHistory();
+				if ($container.isMultipleSelectBoxSelecting()) {
+					/* reset style */
+					$container.removeClass(PLUGIN_STYLE_SELECTING);
+					var selectedRows = $container.getMultipleSelectBoxSelectedRows();
+					/* slide up */
+					if (options.isPopupMode) {
+						$container.slideUp("slow");
+					}
+					/* fire event */
+					$container.trigger("mouseup." + PLUGIN_NAMESPACE);
+					/* trigger callback */
+					if (options.onSelectEnd != null) {
+						options.onSelectEnd.apply($container[0], [ e, selectedRows, containerHistory.selectingStartIndex, containerHistory.selectingCurrentIndex, containerHistory.selectedStartIndex, containerHistory.selectedCurrentIndex ]);
+					}
+					if (options.onSelectChange != null && (containerHistory.selectedRows == null || !isJQueryCollectionEquals(containerHistory.selectedRows, selectedRows))) {
+						options.onSelectChange.apply($container[0], [ e, selectedRows, containerHistory.selectedRows, containerHistory.selectingStartIndex, containerHistory.selectingCurrentIndex, containerHistory.selectedStartIndex,
+							containerHistory.selectedCurrentIndex ]);
+					}
+					/* reset the field value */
+					if (options.submitField != null) {
+						options.submitField.val($container.serializeMultipleSelectBox());
+					}
+					containerHistory.selectedRows = selectedRows;
 				}
-				/* fire event */
-				$container.trigger("mouseup." + PLUGIN_NAMESPACE);
-				/* trigger callback */
-				if (options.onSelectEnd != null) {
-					options.onSelectEnd.apply($container[0], [ e, selectedRows, containerHistory.selectingStartIndex, containerHistory.selectingCurrentIndex, containerHistory.selectedStartIndex, containerHistory.selectedCurrentIndex ]);
-				}
-				if (options.onSelectChange != null && (containerHistory.selectedRows == null || !isJQueryCollectionEquals(containerHistory.selectedRows, selectedRows))) {
-					options.onSelectChange.apply($container[0], [ e, selectedRows, containerHistory.selectedRows, containerHistory.selectingStartIndex, containerHistory.selectingCurrentIndex, containerHistory.selectedStartIndex, containerHistory.selectedCurrentIndex ]);
-				}
-				/* reset the field value */
-				if (options.submitField != null) {
-					options.submitField.val($container.serializeMultipleSelectBox());
-				}
-				containerHistory.selectedRows = selectedRows;
-			}
-			/* reset history */
-			containerHistory.selectedStartIndex = containerHistory.selectingStartIndex;
-			containerHistory.selectedCurrentIndex = containerHistory.selectingCurrentIndex;
-		});
+				/* reset history */
+				containerHistory.selectedStartIndex = containerHistory.selectingStartIndex;
+				containerHistory.selectedCurrentIndex = containerHistory.selectingCurrentIndex;
+			});
 	}
 
 	/**
 	 * Private : Default Scroll Helper's Data
 	 */
 	var defaultScrollHelperUtils = {
-		"mousePos" : 0,
-		"scrollTimer" : null,
-		"startTimer" : function(callback, millisec) {
+		"mousePos": 0,
+		"scrollTimer": null,
+		"startTimer": function(callback, millisec) {
 			if (this.scrollTimer != null || callback == null) {
 				return;
 			}
@@ -979,7 +981,7 @@
 				callback();
 			}, millisec);
 		},
-		"stopTimer" : function() {
+		"stopTimer": function() {
 			if (this.scrollTimer != null) {
 				clearInterval(this.scrollTimer);
 				this.scrollTimer = null;
@@ -999,8 +1001,8 @@
 			}
 			defaultScrollHelperUtils.stopTimer();
 			$container.drawMultipleSelectBox(startIndex, $childTarget.getMultipleSelectBoxRowIndex($container), {
-				"isSelectionRetained" : isSelectionRetained,
-				"scrollPos" : null
+				"isSelectionRetained": isSelectionRetained,
+				"scrollPos": null
 			});
 		} else if (e.type == "mouseup") {
 			/* on mouse down and than mouse up */
@@ -1038,8 +1040,8 @@
 				}
 				/* calculate cuurentIndex */
 				$container.drawMultipleSelectBox(startIndex, calculateScrollHelperCurrentIndex($container, targetPos), {
-					"isSelectionRetained" : isSelectionRetained,
-					"scrollPos" : scrollToPos
+					"isSelectionRetained": isSelectionRetained,
+					"scrollPos": scrollToPos
 				});
 			}, 100);
 		}
