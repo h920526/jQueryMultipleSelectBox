@@ -1,0 +1,34 @@
+{
+  "name": "jQueryMultipleSelectBox",
+  "version": "0.8.2",
+  "homepage": "https://github.com/alberto-bottarini/jQueryMultipleSelectBox",
+  "authors": [
+    "Alberto Bottarini <alberto.bottarini@gmail.com>",
+    "h920526"
+  ],
+  "description": "jQuery Multiple Select Box Plugin",
+  "main": "js/jquery.multipleselectbox.js",
+  "keywords": [
+    "select",
+    "option",
+    "selectable",
+    "scrollable",
+    "jquerymultipleselectbox",
+    "box",
+    "multipleselectbox",
+    "selectbox",
+    "form",
+    "multi"
+  ],
+  "dependencies": {
+    "jquery": ">=1.2"
+  },
+  "license": "Apache License 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
