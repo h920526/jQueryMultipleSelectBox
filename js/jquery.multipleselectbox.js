@@ -14,7 +14,6 @@
 (function($) {
 	/* static variables */
 	var PLUGIN_NAMESPACE = "MultipleSelectBox";
-	var PLUGIN_FILTER_NAMESPACE = "MultipleSelectBoxFilter";
 	var PLUGIN_MODE_AUTO = "auto";
 	var PLUGIN_ATTR_VALUE_RENDER = "value-render";
 	var PLUGIN_STYLE_HORIZONTAL = "horizontal";
@@ -37,9 +36,6 @@
 		"isKeyEventEnabled": true,
 		/* form options */
 		"submitField": null,
-		/* filter options */
-		"isFilterEnabled": true,
-		"filterField": null,
 		/* callback function */
 		"onCreate": null,
 		"onSelectStart": null,
@@ -788,36 +784,6 @@
 		});
 	}
 
-	/**
-	 * Private : Initialize MultipleSelectBox Filter
-	 */
-	function initializeMultipleSelectBoxFilter($container) {
-		var options = $container.getMultipleSelectBoxOptions();
-		var containerOffset = $container.offset();
-		var filterField = options.filterField;
-		$container.bind("mouseenter." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.removeClass(PLUGIN_STYLE_DISABLED);
-		}).bind("mouseleave." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.addClass(PLUGIN_STYLE_DISABLED);
-		}).bind("focus." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.removeClass(PLUGIN_STYLE_DISABLED);
-		}).bind("blur." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.addClass(PLUGIN_STYLE_DISABLED);
-		});
-		filterField.css({
-			"top": containerOffset.top + $container.height() - filterField.outerHeight(),
-			"left": containerOffset.left + $container.width() - filterField.outerWidth() - scrollBarSize
-		}).bind("mouseenter." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.removeClass(PLUGIN_STYLE_DISABLED);
-		}).bind("mouseleave." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.addClass(PLUGIN_STYLE_DISABLED);
-		}).bind("focus." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.removeClass(PLUGIN_STYLE_DISABLED);
-		}).bind("blur." + PLUGIN_FILTER_NAMESPACE, function() {
-			filterField.addClass(PLUGIN_STYLE_DISABLED);
-		});
-	}
-
 	function computeMultipleSelectBoxOptions($container, options) {
 		if (options.isTouchDeviceMode == PLUGIN_MODE_AUTO) {
 			options.isTouchDeviceMode = isTouchDevice;
@@ -829,15 +795,6 @@
 		if (originalSubmitField != null && typeof originalSubmitField == "string") {
 			var $submitField = $("input[name=" + originalSubmitField + "]");
 			options.submitField = ($submitField.length > 0 ? $submitField : $("<input type='hidden' name='" + originalSubmitField + "'/>").insertAfter($container));
-		}
-		if (options.isFilterEnabled) {
-			var filterField = options.filterField;
-			if (filterField == null) {
-				filterField = $("<div>Search: <input type='text' size='20'/></div>").insertAfter($container);
-			} else if (typeof filterField == "string") {
-				filterField = $("#" + filterField);
-			}
-			options.filterField = filterField;
 		}
 		$container.data("options", options);
 	}
@@ -863,9 +820,6 @@
 		});
 		/* touch scroll supported for ios5+ only */
 		/* $container.css("-webkit-overflow-scrolling", "touch"); */
-		if (options.isFilterEnabled) {
-			options.filterField.addClass(PLUGIN_FILTER_NAMESPACE + " " + PLUGIN_STYLE_DISABLED);
-		}
 	}
 
 	function initializeMultipleSelectBoxCallbackFunctions($container, options) {
@@ -902,10 +856,6 @@
 		/* touch event */
 		if (options.isTouchDeviceMode) {
 			initializeMultipleSelectBoxTouchEvent($container);
-		}
-		/* search helper */
-		if (options.isFilterEnabled) {
-			initializeMultipleSelectBoxFilter($container);
 		}
 		/* reset the field value */
 		if (options.submitField != null) {
