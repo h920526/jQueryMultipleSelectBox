@@ -119,10 +119,10 @@
 		 * @return jQuery
 		 */
 		"getMultipleSelectBoxSelectedRows": function() {
-			return $.grep(this.getMultipleSelectBoxCachedRows(), function(row) {
+			return this.pushStack($.grep(this.getMultipleSelectBoxCachedRows(), function(row) {
 				var $childRow = $(row);
 				return ($childRow.isMultipleSelectBoxRowSelectable() && $childRow.isMultipleSelectBoxRowSelected());
-			});
+			}));
 		},
 
 		/**

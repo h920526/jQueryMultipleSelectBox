@@ -3,9 +3,13 @@ jQueryMultipleSelectBox Change Log
 Version -
 ====================
 ．Add isFilterEnabled
+
+Version 0.8.2
+====================
 ．Remove getMultipleSelectBoxHistory's isReNew parameter
 ．Add method: clearMultipleSelectBoxHistory and refreshMultipleSelectBox
 ．Fix bug: serialize submit field after initializing
+．Issue 2: onSelectChange error
 
 Version 0.8.1
 ====================
