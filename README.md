@@ -12,7 +12,6 @@ jQuery Multiple Select Box Plugin
 
 Tested with: Android 2+, Chrome 22, Firefox 16, IE 6+, Safari 5
 
-<br />
 Download: https://github.com/h920526/jQueryMultipleSelectBox/releases
 
 See also:
