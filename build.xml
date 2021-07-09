@@ -13,7 +13,7 @@
          ================================= -->
 	<target name="clean" description="clean">
 		<delete file="${ant.project.name}-${version}.zip" />
-		<delete file="js/${ant.project.name}-src.js" />
+		<delete file="js/${ant.project.name}-tmp.js" />
 		<delete file="js/${ant.project.name}-min.js" />
 	</target>
 
@@ -21,9 +21,9 @@
           target: replace              
          ================================= -->
 	<target name="replace" description="replace">
-		<delete file="js/${ant.project.name}-src.js" />
-		<copy file="js/${ant.project.name}.js" tofile="js/${ant.project.name}-src.js" overwrite="true" />
-		<replace file="js/${ant.project.name}-src.js">
+		<delete file="js/${ant.project.name}-tmp.js" />
+		<copy file="js/${ant.project.name}.js" tofile="js/${ant.project.name}-tmp.js" overwrite="true" />
+		<replace file="js/${ant.project.name}-tmp.js">
 			<replacefilter token="%Revision%" value="${version}" />
 			<replacefilter token="%BuiltDate%" value="${today}" />
 		</replace>
@@ -34,7 +34,7 @@
          ================================= -->
 	<target name="compress" description="compress">
 		<java jar="${compressorPath}" fork="true" failonerror="true">
-			<arg line="--js ${basedir}/js/${ant.project.name}-src.js --js_output_file ${basedir}/js/${ant.project.name}-min.js" />
+			<arg line="--js ${basedir}/js/${ant.project.name}-tmp.js --js_output_file ${basedir}/js/${ant.project.name}-min.js" />
 		</java>
 	</target>
 
@@ -45,6 +45,7 @@
 		<antcall target="clean" />
 		<antcall target="replace" />
 		<antcall target="compress" />
+		<delete file="js/${ant.project.name}-tmp.js" />
 		<zip destfile="${ant.project.name}-${version}.zip" update="true">
 			<zipfileset prefix="${ant.project.name}-${version}" dir="${basedir}">
 				<include name="js/${ant.project.name}-*.js" />
